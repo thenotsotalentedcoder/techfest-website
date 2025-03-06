@@ -1,10 +1,20 @@
 // src/components/common/Footer.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { clubsData } from '../../data/clubsData';
 
 const Footer = () => {
+  const location = useLocation();
+
+  // Function to handle scrolling to top
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -29,6 +39,14 @@ const Footer = () => {
     }
   };
 
+  // Handle the home link click based on current path
+  const handleHomeClick = (e) => {
+    if (location.pathname === '/') {
+      e.preventDefault();
+      scrollToTop();
+    }
+  };
+
   return (
     <footer className="bg-tech-darker relative overflow-hidden">
       {/* Circuit pattern overlay */}
@@ -46,7 +64,11 @@ const Footer = () => {
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <motion.div variants={itemVariants}>
-            <Link to="/" className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-tech-blue via-purple-500 to-pink-500 inline-block mb-4">
+            <Link 
+              to="/" 
+              className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-tech-blue via-purple-500 to-pink-500 inline-block mb-4"
+              onClick={handleHomeClick}
+            >
               TECH FEST '25
             </Link>
             <p className="text-gray-400 mb-4">Department of Computer Science & Information Technology</p>
@@ -80,7 +102,11 @@ const Footer = () => {
             <h3 className="text-xl font-semibold mb-4 text-white">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-gray-400 hover:text-tech-blue transition-colors flex items-center">
+                <Link 
+                  to="/" 
+                  className="text-gray-400 hover:text-tech-blue transition-colors flex items-center"
+                  onClick={handleHomeClick}
+                >
                   <svg className="w-3 h-3 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                   </svg>

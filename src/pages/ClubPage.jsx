@@ -57,23 +57,57 @@ const ClubPage = () => {
       className="min-h-screen pt-24 pb-16 bg-tech-dark text-white"
     >
       {/* Hero Section */}
-      <div className="bg-tech-darker py-16 mb-12 circuit-bg">
-        <div className="container mx-auto px-4">
+      <div className="bg-tech-darker py-12 md:py-16 mb-8 md:mb-12 relative overflow-hidden">
+        {/* Background elements */}
+        <div className="absolute inset-0 z-0">
+          {/* Gradient glows */}
+          <div className="tech-glow" style={{ width: '300px', height: '300px', backgroundColor: club.color, top: '20%', left: '-10%', opacity: '0.07', filter: 'blur(120px)' }}></div>
+          <div className="tech-glow" style={{ width: '250px', height: '250px', backgroundColor: club.color, bottom: '10%', right: '-10%', opacity: '0.07', filter: 'blur(100px)' }}></div>
+          
+          {/* Animated particles */}
+          {[...Array(10)].map((_, i) => (
+            <motion.div
+              key={`particle-${i}`}
+              className="absolute w-1 h-1 rounded-full"
+              style={{
+                backgroundColor: club.color,
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                opacity: 0.4
+              }}
+              animate={{
+                y: [-20, -100],
+                x: [0, Math.random() * 50 - 25],
+                opacity: [0.4, 0],
+              }}
+              transition={{
+                duration: 5 + Math.random() * 7,
+                repeat: Infinity,
+                delay: Math.random() * 5
+              }}
+            />
+          ))}
+          
+          {/* Tech lines background */}
+          <div className="absolute inset-0 tech-lines opacity-5"></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col items-center justify-center text-center">
             <motion.div
               variants={itemVariants}
-              className="mb-6"
+              className="mb-4 md:mb-6"
             >
-              <div className="w-24 h-24 rounded-full p-1" style={{ background: `linear-gradient(135deg, ${club.color}, ${club.color}80)` }}>
+              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full p-1" style={{ background: `linear-gradient(135deg, ${club.color}, ${club.color}80)` }}>
                 <div className="w-full h-full bg-tech-dark rounded-full flex items-center justify-center">
-                  <span className="text-3xl font-medium" style={{ color: club.color }}>{club.name.charAt(0)}</span>
+                  <span className="text-2xl md:text-3xl font-medium" style={{ color: club.color }}>{club.name.charAt(0)}</span>
                 </div>
               </div>
             </motion.div>
             
             <motion.h1
               variants={itemVariants}
-              className="text-4xl font-bold mb-4"
+              className="text-3xl md:text-4xl font-bold mb-3 md:mb-4"
               style={{ color: club.color }}
             >
               {club.name}
@@ -81,7 +115,7 @@ const ClubPage = () => {
             
             <motion.p
               variants={itemVariants}
-              className="text-xl text-gray-300 max-w-2xl"
+              className="text-lg md:text-xl text-gray-300 max-w-2xl"
             >
               {club.domain} - {club.shortDesc}
             </motion.p>
@@ -92,7 +126,7 @@ const ClubPage = () => {
                 href={club.socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center hover:underline"
+                className="mt-4 md:mt-6 inline-flex items-center hover:underline"
                 style={{ color: club.color }}
               >
                 <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -105,85 +139,47 @@ const ClubPage = () => {
         </div>
       </div>
       
-      {/* Club Details Section */}
+      {/* Club Description Section */}
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {/* About Section */}
-          <motion.div 
-            variants={itemVariants}
-            className="md:col-span-2"
-          >
-            <h2 className="text-2xl font-bold mb-6 text-white">About {club.name}</h2>
-            <p className="text-gray-300 mb-6">
-              {club.description || `${club.name} is a student-led organization dedicated to fostering learning and innovation in the field of ${club.domain}. The club organizes workshops, competitions, and collaborative projects to enhance practical knowledge.`}
-            </p>
-            
-            <h3 className="text-xl font-semibold mb-4 text-white">Activities</h3>
-            <ul className="list-disc pl-5 text-gray-300 space-y-2">
-              <li className="animate-fade-in-1">Regular technical workshops</li>
-              <li className="animate-fade-in-2">Industry connect sessions</li>
-              <li className="animate-fade-in-3">Competitions and hackathons</li>
-              <li className="animate-fade-in-4">Project collaborations</li>
-            </ul>
-          </motion.div>
-          
-          {/* Team Section */}
-          <motion.div 
-            variants={itemVariants}
-            className="bg-tech-darker rounded-xl p-6 border border-gray-800"
-            style={{ borderColor: `${club.color}40` }}
-          >
-            <h2 className="text-2xl font-bold mb-6 text-white">Team</h2>
-            
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-3 text-white">Team Lead</h3>
-              <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4" style={{ backgroundColor: `${club.color}20` }}>
-                  <span style={{ color: club.color }}>TL</span>
-                </div>
-                <div>
-                  <p className="font-medium text-white">Team Lead Name</p>
-                  <p className="text-sm text-gray-400">Student, CSIT</p>
-                </div>
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold mb-3 text-white">Faculty Advisor</h3>
-              <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4" style={{ backgroundColor: `${club.color}20` }}>
-                  <span style={{ color: club.color }}>FA</span>
-                </div>
-                <div>
-                  <p className="font-medium text-white">Faculty Name</p>
-                  <p className="text-sm text-gray-400">Professor, CSIT</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-        
-        {/* Recent Events Section */}
         <motion.div 
           variants={itemVariants}
-          className="mb-16"
+          className="bg-tech-darker rounded-xl p-5 md:p-8 border border-gray-800 hover:border-opacity-70 hover:border-tech-blue/20 transition-all duration-500 mb-8 md:mb-12"
+          style={{ borderColor: `${club.color}30` }}
         >
-          <h2 className="text-2xl font-bold mb-8 text-white">Recent Events</h2>
-          
-          <div 
-            className="bg-tech-darker rounded-xl p-6 border border-gray-800 hover:shadow-lg transition-all duration-300"
-            style={{ borderColor: `${club.color}40`, boxShadow: `0 4px 20px -5px ${club.color}20` }}
-          >
-            <h3 className="text-xl font-semibold mb-4 text-white">Tech Fest '24 Workshop</h3>
-            <p className="text-gray-300 mb-4">
-              A hands-on workshop focusing on the latest technologies in {club.domain}.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              <span className="px-3 py-1 rounded-full text-sm" style={{ backgroundColor: `${club.color}20`, color: club.color }}>Workshop</span>
-              <span className="px-3 py-1 bg-purple-500/20 text-purple-500 rounded-full text-sm">Tech Fest '24</span>
-            </div>
-          </div>
+          <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-white">About {club.name}</h2>
+          <p className="text-gray-300 text-sm md:text-base leading-relaxed whitespace-pre-wrap break-words overflow-hidden">
+            {club.description}
+          </p>
         </motion.div>
+        
+        {/* Faculty Lead Section - Only display if there are faculty leads */}
+        {(club.facultyLead || club.emailLead) && (
+          <motion.div 
+            variants={itemVariants}
+            className="bg-tech-darker rounded-xl p-5 md:p-8 border border-gray-800 hover:border-opacity-70 hover:border-tech-blue/20 transition-all duration-500 mb-8 md:mb-12"
+            style={{ borderColor: `${club.color}30` }}
+          >
+            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-white">Faculty Leads</h2>
+            
+            {club.facultyLead && (
+              <div className="mb-4">
+                <h3 className="text-lg font-semibold text-white mb-2">Faculty</h3>
+                <p className="text-gray-300 text-sm md:text-base break-words">{club.facultyLead}</p>
+              </div>
+            )}
+            
+            {club.emailLead && (
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-2">Contact</h3>
+                <p className="text-gray-300 text-sm md:text-base break-words">{club.emailLead}</p>
+              </div>
+            )}
+            
+            <div className="mt-6 text-gray-400 text-sm md:text-base">
+              <p>Feel free to reach out to the faculty leads for more information about the club and how to get involved.</p>
+            </div>
+          </motion.div>
+        )}
       </div>
     </motion.div>
   );

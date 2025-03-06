@@ -71,7 +71,7 @@ const Navbar = () => {
             <div className="flex space-x-8 items-center">
               <Link 
                 to="/" 
-                className={`text-white hover:text-tech-blue transition-colors ${
+                className={`text-white hover:text-tech-blue transition-colors font-cyber tracking-wide ${
                   location.pathname === '/' ? 'text-tech-blue font-medium' : ''
                 }`}
               >
@@ -80,7 +80,7 @@ const Navbar = () => {
               
               {/* CSIT Clubs Dropdown */}
               <div className="relative group">
-                <button className={`text-white hover:text-tech-blue transition-colors flex items-center ${
+                <button className={`text-white hover:text-tech-blue transition-colors flex items-center font-cyber tracking-wide ${
                   location.pathname.includes('/clubs/') ? 'text-tech-blue font-medium' : ''
                 }`}>
                   CSIT Clubs <span className="ml-1">▼</span>
@@ -90,7 +90,16 @@ const Navbar = () => {
                     <Link
                       key={club.id}
                       to={`/clubs/${club.slug}`}
-                      className="block px-4 py-2 text-sm text-white hover:bg-tech-blue/20"
+                      className="block px-4 py-2 text-sm font-cyber tracking-wide text-white hover:bg-tech-blue/20 transition-all duration-200"
+                      style={{ 
+                        color: location.pathname === `/clubs/${club.slug}` ? club.color : "rgb(255, 255, 255)",
+                      }}
+                      onMouseOver={(e) => e.currentTarget.style.color = club.color}
+                      onMouseOut={(e) => {
+                        if (location.pathname !== `/clubs/${club.slug}`) {
+                          e.currentTarget.style.color = "rgb(255, 255, 255)"
+                        }
+                      }}
                     >
                       {club.name}
                     </Link>
@@ -101,7 +110,7 @@ const Navbar = () => {
               {/* Events Link */}
               <Link 
                 to="/events" 
-                className={`text-white hover:text-tech-blue transition-colors ${
+                className={`text-white hover:text-tech-blue transition-colors font-cyber tracking-wide ${
                   location.pathname === '/events' ? 'text-tech-blue font-medium' : ''
                 }`}
               >
@@ -111,7 +120,7 @@ const Navbar = () => {
               {/* Schedule Link */}
               <Link 
                 to="/schedule" 
-                className={`text-white hover:text-tech-blue transition-colors ${
+                className={`text-white hover:text-tech-blue transition-colors font-cyber tracking-wide ${
                   location.pathname === '/schedule' ? 'text-tech-blue font-medium' : ''
                 }`}
               >
@@ -153,18 +162,27 @@ const Navbar = () => {
             <div className="px-4 py-5 space-y-4">
               <Link 
                 to="/" 
-                className="block text-white hover:text-tech-blue"
+                className="block text-white hover:text-tech-blue font-cyber tracking-wide"
               >
                 Home
               </Link>
               
               <div className="border-t border-gray-800 pt-2">
-                <div className="text-gray-400 mb-2">CSIT Clubs</div>
+                <div className="text-gray-400 mb-2 font-cyber tracking-wide">CSIT Clubs</div>
                 {clubsData.map((club) => (
                   <Link
                     key={club.id}
                     to={`/clubs/${club.slug}`}
-                    className="block text-white hover:text-tech-blue pl-4 py-1"
+                    className="block pl-4 py-1 transition-colors duration-200 font-cyber tracking-wide"
+                    style={{ 
+                      color: location.pathname === `/clubs/${club.slug}` ? club.color : "rgb(255, 255, 255)",
+                    }}
+                    onMouseOver={(e) => e.currentTarget.style.color = club.color}
+                    onMouseOut={(e) => {
+                      if (location.pathname !== `/clubs/${club.slug}`) {
+                        e.currentTarget.style.color = "rgb(255, 255, 255)"
+                      }
+                    }}
                   >
                     {club.name}
                   </Link>
@@ -173,14 +191,14 @@ const Navbar = () => {
               
               <Link 
                 to="/events" 
-                className="block text-white hover:text-tech-blue"
+                className="block text-white hover:text-tech-blue font-cyber tracking-wide"
               >
                 Events
               </Link>
               
               <Link 
                 to="/schedule" 
-                className="block text-white hover:text-tech-blue"
+                className="block text-white hover:text-tech-blue font-cyber tracking-wide"
               >
                 Schedule
               </Link>

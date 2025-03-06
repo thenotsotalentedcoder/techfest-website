@@ -144,7 +144,7 @@ const HeroSection = () => {
           variants={textVariants}
           initial="hidden"
           animate="visible"
-          className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-[#00BFFF] via-[#9B51E0] to-[#FF00FF]"
+          className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-8 bg-clip-text text-transparent bg-gradient-to-r from-[#00BFFF] via-[#9B51E0] to-[#FF00FF]"
         >
           TECH FEST <span className="text-white">'25</span>
         </motion.h1>
@@ -154,16 +154,16 @@ const HeroSection = () => {
           variants={textVariants}
           initial="hidden"
           animate="visible"
-          className="mb-8"
+          className="mb-6 sm:mb-8"
         >
           {/* Improved "Coming Soon" text with tech font and effect */}
-          <div className="flex items-center justify-center space-x-3">
-            <span className="text-xl font-cyber md:text-2xl tracking-wider relative">
+          <div className="flex flex-col sm:flex-row items-center justify-center sm:space-x-3">
+            <span className="text-lg sm:text-xl md:text-2xl font-cyber tracking-wider relative mb-2 sm:mb-0">
               <span className="absolute inset-0 animate-pulse-light opacity-50 blur-sm bg-clip-text text-transparent bg-gradient-to-r from-tech-blue to-purple-500">Coming Soon</span>
               <span className="relative bg-clip-text text-transparent bg-gradient-to-r from-tech-blue to-purple-500">Coming Soon</span>
             </span>
-            <span className="h-6 w-px bg-gray-500/50"></span>
-            <span className="text-xl md:text-2xl">The biggest tech event at NED University</span>
+            <span className="hidden sm:block h-6 w-px bg-gray-500/50"></span>
+            <span className="text-lg sm:text-xl md:text-2xl">The biggest tech event at NED University</span>
           </div>
         </motion.div>
         
@@ -173,18 +173,18 @@ const HeroSection = () => {
           variants={textVariants}
           initial="hidden"
           animate="visible"
-          className="flex justify-center space-x-4 md:space-x-8 mb-12"
+          className="flex justify-center space-x-3 sm:space-x-4 md:space-x-8 mb-12"
         >
           {Object.entries(countdown).map(([label, value]) => (
             <div key={label} className="flex flex-col">
               <motion.div 
-                className="bg-tech-darker/80 backdrop-blur-md w-16 md:w-24 h-16 md:h-24 rounded-lg flex items-center justify-center text-xl md:text-3xl mb-2 border border-tech-blue/20 relative overflow-hidden"
+                className="bg-tech-darker/80 backdrop-blur-md w-14 sm:w-16 md:w-24 h-14 sm:h-16 md:h-24 rounded-lg flex items-center justify-center text-lg sm:text-xl md:text-3xl mb-2 border border-tech-blue/20 relative overflow-hidden"
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-tech-blue/10 to-purple-500/10 opacity-50" />
                 <span>{value}</span>
               </motion.div>
-              <span className="text-sm uppercase tracking-wide">{label}</span>
+              <span className="text-xs sm:text-sm uppercase tracking-wide">{label}</span>
             </div>
           ))}
         </motion.div>

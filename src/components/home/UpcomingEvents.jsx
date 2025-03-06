@@ -78,9 +78,9 @@ const UpcomingEvents = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex justify-between items-center mb-10"
+          className="flex flex-col sm:flex-row justify-between items-center mb-8 md:mb-10"
         >
-          <h2 className="text-3xl font-cyber bg-clip-text text-transparent bg-gradient-to-r from-tech-blue to-purple-500">Upcoming Events</h2>
+          <h2 className="text-3xl font-cyber bg-clip-text text-transparent bg-gradient-to-r from-tech-blue to-purple-500 mb-4 sm:mb-0 text-center sm:text-left">Upcoming Events</h2>
           <Link 
             to="/events" 
             className="text-tech-blue hover:text-purple-500 transition-colors flex items-center font-medium"
@@ -122,33 +122,35 @@ const UpcomingEvents = () => {
                 {event.category}
               </div>
               
-              <div className="relative p-6 h-full flex flex-col pt-8">
+              <div className="relative p-4 sm:p-6 h-full flex flex-col">
                 {/* Event Icon */}
-                <div className="text-4xl mb-3">{event.icon}</div>
+                <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">{event.icon}</div>
                 
                 {/* Event Details */}
-                <h3 className="text-xl font-cyber mb-2">{event.title}</h3>
+                <h3 className="text-lg sm:text-xl font-medium sm:font-cyber mb-2 truncate">{event.title}</h3>
                 
-                <div className="mb-4 text-gray-400 text-sm">
-                  <div className="flex items-center mb-1">
-                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="mb-3 sm:mb-4 text-gray-400 text-xs sm:text-sm space-y-1">
+                  <div className="flex items-center">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
-                    {event.date}
+                    <span className="truncate">{event.date}</span>
                   </div>
                   <div className="flex items-center">
-                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    {event.time}
+                    <span className="truncate">{event.time}</span>
                   </div>
                 </div>
                 
-                <div className="mt-auto pt-4 flex justify-between items-center">
+                <p className="text-gray-300 text-xs sm:text-sm mb-3 sm:mb-6 line-clamp-2 overflow-hidden">{event.description}</p>
+                
+                <div className="mt-auto pt-3 sm:pt-4 flex justify-between items-center">
                   {event.registration ? (
                     <Link 
                       to={`/events/${event.id}`}
-                      className="px-4 py-2 rounded-full text-sm transition-colors"
+                      className="px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm transition-colors"
                       style={{ 
                         borderWidth: '1px',
                         borderStyle: 'solid',
@@ -167,12 +169,12 @@ const UpcomingEvents = () => {
                       Register
                     </Link>
                   ) : (
-                    <span className="text-gray-500 text-sm">Registration not required</span>
+                    <span className="text-gray-500 text-xs sm:text-sm">Registration not required</span>
                   )}
                   
                   <Link 
                     to={`/events/${event.id}`}
-                    className="text-tech-blue hover:text-purple-500 text-sm transition-colors"
+                    className="text-tech-blue hover:text-purple-500 text-xs sm:text-sm transition-colors"
                   >
                     Details →
                   </Link>
