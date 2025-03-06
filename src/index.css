@@ -1,0 +1,514 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@100..900&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-tech-dark text-white font-sans overflow-x-hidden;
+}
+
+/* Background styles */
+.tech-bg {
+  background-color: #0A0A0A;
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.15;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: rgba(0, 191, 255, 0.7);
+  border-radius: 50%;
+}
+
+/* Custom scroll bar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-tech-darker;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gradient-to-b from-tech-blue to-purple-500 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gradient-to-b from-tech-blue via-purple-500 to-pink-500;
+}
+
+/* Custom animations and utilities */
+@layer components {
+  .gradient-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-tech-blue via-purple-500 to-pink-500;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,191,255,0.5)] hover:-translate-y-1;
+  }
+  
+  .neon-border {
+    @apply border border-transparent relative;
+  }
+  
+  .neon-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg p-[1px] bg-gradient-to-r from-tech-blue via-purple-500 to-pink-500 -z-10;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-md bg-tech-dark/40 border border-white/10;
+  }
+
+  .tech-button {
+    @apply px-6 py-2 rounded-full bg-tech-blue text-white font-medium transition-all duration-300 hover:bg-tech-blue/90 hover:shadow-[0_0_15px_rgba(0,191,255,0.5)];
+  }
+
+  .tech-button-outline {
+    @apply px-6 py-2 rounded-full border border-tech-blue text-tech-blue font-medium transition-all duration-300 hover:bg-tech-blue/10 hover:shadow-[0_0_15px_rgba(0,191,255,0.3)];
+  }
+
+  .tech-button-gradient {
+    @apply px-6 py-2 rounded-full bg-gradient-to-r from-tech-blue to-purple-500 text-white font-medium transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,191,255,0.5)];
+  }
+
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+
+  .hover-glow {
+    @apply transition-shadow duration-300 hover:shadow-[0_0_15px_rgba(0,191,255,0.4)];
+  }
+
+  .section-container {
+    @apply container mx-auto px-4 py-16;
+  }
+
+  .grid-auto-fill {
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6;
+  }
+}
+
+/* Animation for flowing particles */
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100px) translateX(20px);
+    opacity: 0;
+  }
+}
+
+/* Gradient hover effects for buttons */
+.gradient-btn {
+  background-size: 200% auto;
+  background-image: linear-gradient(to right, #00BFFF, #9B51E0, #FF00FF, #9B51E0, #00BFFF);
+  transition: all 0.5s ease;
+}
+
+.gradient-btn:hover {
+  background-position: right center;
+}
+
+/* Event card transitions */
+.event-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 191, 255, 0.3);
+}
+
+.event-details {
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+
+.event-details.expanded {
+  max-height: 500px;
+  opacity: 1;
+}
+
+/* Keyframe animations */
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.7), 0 0 30px rgba(157, 0, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+  }
+}
+
+@keyframes pulse-light {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-glow {
+  animation: glow 3s infinite ease-in-out;
+}
+
+.animate-float {
+  animation: float 6s infinite ease-in-out;
+}
+
+.animate-pulse-light {
+  animation: pulse-light 3s infinite ease-in-out;
+}
+
+/* Fade-in animations */
+.animate-fade-in-1 {
+  animation: fadeIn 0.5s ease-out 0.1s both;
+}
+
+.animate-fade-in-2 {
+  animation: fadeIn 0.5s ease-out 0.2s both;
+}
+
+.animate-fade-in-3 {
+  animation: fadeIn 0.5s ease-out 0.3s both;
+}
+
+.animate-fade-in-4 {
+  animation: fadeIn 0.5s ease-out 0.4s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Text shadows for gradient text headings */
+.text-glow {
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.7), 0 0 20px rgba(157, 0, 255, 0.5);
+}
+
+/* Grid layouts */
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Custom gradients */
+.bg-tech-gradient {
+  background: linear-gradient(135deg, rgba(0, 191, 255, 0.2), rgba(157, 0, 255, 0.2));
+}
+
+.bg-tech-gradient-dark {
+  background: linear-gradient(135deg, rgba(0, 191, 255, 0.1), rgba(157, 0, 255, 0.1));
+}
+
+/* Loading animation for images and content */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03)
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Tech lines background (subtle alternative to grid) */
+.tech-lines {
+  background-color: #0A0A0A;
+  background-image: linear-gradient(rgba(0, 191, 255, 0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 191, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: -1px -1px;
+}
+
+/* Cursor effect */
+.cursor-glow {
+  cursor: pointer;
+  position: relative;
+}
+
+.cursor-glow::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,191,255,0.4) 0%, rgba(0,191,255,0) 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Gradient text animation */
+.gradient-text-animate {
+  background-size: 200% auto;
+  background-image: linear-gradient(to right, #00BFFF, #9B51E0, #FF00FF, #9B51E0, #00BFFF);
+  animation: gradientText 5s linear infinite;
+}
+
+@keyframes gradientText {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Hover effect for cards */
+.hover-lift-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-lift-glow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 191, 255, 0.3);
+}
+
+/* Better typography for readability */
+p {
+  @apply leading-relaxed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-cyber tracking-wide;
+}
+
+code {
+  @apply font-code bg-tech-darker px-1 py-0.5 rounded text-tech-blue;
+}
+
+/* Specific component styles */
+.club-card {
+  @apply bg-tech-darker rounded-xl p-6 border border-gray-800 transition-all duration-300 hover:border-tech-blue/30 hover:-translate-y-1 hover:shadow-[0_5px_20px_-5px_rgba(0,191,255,0.3)];
+}
+
+.tech-fest-timeline {
+  @apply relative border-l-2 border-tech-blue/30 pl-6 ml-4;
+}
+
+.tech-fest-timeline-dot {
+  @apply absolute w-4 h-4 rounded-full bg-tech-blue -left-[9px] mt-1;
+}
+
+.tech-fest-timeline-dot::before {
+  content: '';
+  @apply absolute inset-0 rounded-full bg-tech-blue animate-ping opacity-75;
+}
+
+/* Accessible focus styles */
+:focus-visible {
+  @apply outline-none ring-2 ring-tech-blue;
+}
+
+/* Custom transitions */
+.transition-gpu {
+  @apply transition transform-gpu;
+}
+
+/* Blinking cursor animation (for terminals or code displays) */
+.blink-cursor {
+  animation: blinkCursor 1s step-end infinite;
+}
+
+@keyframes blinkCursor {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Fancy angle borders */
+.angle-border {
+  position: relative;
+}
+
+.angle-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border-top: 2px solid #00BFFF;
+  border-left: 2px solid #00BFFF;
+}
+
+.angle-border::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  border-bottom: 2px solid #9B51E0;
+  border-right: 2px solid #9B51E0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .tech-button, .tech-button-outline, .tech-button-gradient {
+    @apply text-sm px-4 py-2;
+  }
+  
+  .section-container {
+    @apply py-10;
+  }
+}
+
+/* Custom media queries for medium screens */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .md-custom-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Floating animation variants */
+.float-slow {
+  animation: float 10s ease-in-out infinite;
+}
+
+.float-medium {
+  animation: float 7s ease-in-out infinite;
+}
+
+.float-fast {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* 3D card effect */
+.card-3d {
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.card-3d:hover {
+  transform: rotateY(5deg) rotateX(5deg);
+}
+
+/* Custom button with hover effect */
+.button-hover-slide {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.button-hover-slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+  z-index: -1;
+}
+
+.button-hover-slide:hover::before {
+  left: 100%;
+}
+
+
+
+/* Add these styles to your index.css file */
+
+/* Tech fonts and effects */
+.font-cyber {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+}
+
+/* Enhanced glass card effect */
+.glass-card {
+  background: rgba(10, 10, 15, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+}
+
+/* Better button hover effect */
+.tech-hover-button {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.tech-hover-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(0,191,255,0.3), rgba(155,81,224,0.3));
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  border-radius: 9999px;
+}
+
+.tech-hover-button:hover::before {
+  opacity: 1;
+}
+
+/* Animated gradient text */
+.animated-gradient-text {
+  background-size: 200% auto;
+  background-image: linear-gradient(to right, #00BFFF, #9B51E0, #FF00FF, #9B51E0, #00BFFF);
+  animation: gradientText 5s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes gradientText {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Subtle card glow effect */
+.subtle-glow {
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.subtle-glow:hover {
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.2), 0 0 5px rgba(155, 81, 224, 0.1);
+}
